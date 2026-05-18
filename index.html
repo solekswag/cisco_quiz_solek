@@ -15,8 +15,8 @@
     --surface:   #161922;
     --card:      #1c2030;
     --border:    #252a3a;
-    --accent:    #4f8fff;
-    --accent2:   #7c5cfc;
+    --accent: #3a3f50;
+    --accent2: #3a3f50;
     --correct:   #22c55e;
     --wrong:     #ef4444;
     --text:      #e8ecf5;
@@ -422,6 +422,18 @@
     50%  { transform: scale(1.015) translateX(3px); }
     100% { transform: scale(1) translateX(3px); }
   }
+  body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("https://i.imgur.com/3ZQ3Z6p.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 500px;
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 0;
+}
 </style>
 </head>
 <body>
@@ -470,6 +482,7 @@
     <button class="btn btn-ghost" id="btnPrev" onclick="navigate(-1)">&#8592; Previous</button>
     <button class="btn btn-primary" id="btnNext" onclick="navigate(1)">Next &#8594;</button>
   </div>
+  
 
   <!-- Result screen -->
   <div class="result-screen" id="resultScreen">
@@ -493,6 +506,7 @@
     </div>
     <button class="btn btn-primary" onclick="restartQuiz()" style="min-width:180px">↺ Restart Quiz</button>
   </div>
+  
 
 </div>
 
