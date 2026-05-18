@@ -508,147 +508,2253 @@
 ═══════════════════════════════════════════════════════════════════ */
 const ALL_QUESTIONS = [
 
-  // ── Q15 ──────────────────────────────────────────────────────────
+  // Q1
   {
-    question: "What action takes place when the source MAC address of a frame entering a switch is in the MAC address table?",
+    question: "Refer to the exhibit. What will router R1 do with a packet that has a destination IPv6 address of 2001:db8:cafe:5::1?",
     options: [
-      "The switch updates the refresh timer for the entry",
-      "The switch drops the frame",
-      "The switch adds a duplicate entry",
-      "The switch forwards the frame to all ports"
+      "Drop the packet",
+      "Forward to default gateway",
+      "Forward the packet out Serial0/0/0",
+      "Send ICMP unreachable"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q2
+  {
+    question: "Which floating static route would create a backup to the 10.10.0.0/16 network via 209.165.200.225?",
+    options: [
+      "ip route 10.10.0.0 255.255.0.0 209.165.200.225 10",
+      "ip route 10.10.0.0 255.255.0.0 209.165.200.225 100",
+      "ip route 0.0.0.0 0.0.0.0 209.165.200.225",
+      "ip route 10.10.0.0 255.255.0.0 S0/0/0"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q3
+  {
+    question: "A network admin notices the command 'ip route 209.165.200.224 255.255.255.224 S0/0/0' does not provide Internet access. What should be fixed?",
+    options: [
+      "Change the subnet mask to 255.255.255.0",
+      "Set the administrative distance to 10",
+      "Change the exit interface to G0/0",
+      "Change the destination to 0.0.0.0 0.0.0.0"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q4
+  {
+    question: "Which option shows a correctly configured IPv4 default static route?",
+    options: [
+      "ip route 0.0.0.0 0.0.0.0 S0/0/0",
+      "ip route 0.0.0.0 255.255.255.255 S0/0/0",
+      "ip route 192.168.1.0 255.255.255.0 S0/0/0",
+      "ip route 0.0.0.0 0.0.0.0 192.168.1.1 254"
     ],
     correct: [0],
     multi: false
   },
 
-  // ── Q16 ──────────────────────────────────────────────────────────
+  // Q5
   {
-    question: "How can a network administrator reduce the number of devices that receive broadcast traffic?",
+    question: "What is the correct static route command to reach an IPv6 LAN via router R2's link-local address?",
     options: [
-      "Segment the LAN into smaller LANs and route between them",
-      "Replace switches with hubs",
-      "Disable the Spanning Tree Protocol",
-      "Use only one large VLAN for all devices"
+      "ipv6 route ::/0 S0/0/1",
+      "ipv6 route 2001:db8:12:10::/64 fe80::1",
+      "ipv6 route 2001:db8:12:10::/64 S0/0/1 fe80::2",
+      "ipv6 route 2001:db8:12:10::/64 2001:db8:12:10::1"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q6
+  {
+    question: "What is a method to launch a VLAN hopping attack?",
+    options: [
+      "MAC address table overflow",
+      "Introducing a rogue switch and enabling trunking",
+      "Spoofing a DHCP server",
+      "Disabling STP"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q7
+  {
+    question: "A security analyst runs the 'macof' tool during an evaluation. Which type of LAN attack is being targeted?",
+    options: [
+      "VLAN hopping",
+      "DHCP starvation",
+      "MAC address table overflow",
+      "ARP poisoning"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q8
+  {
+    question: "Why does a DHCPv6 server show 'active clients: 0' under stateless DHCPv6 operation?",
+    options: [
+      "The pool is empty",
+      "The server is disabled",
+      "Clients use IPv4 only",
+      "State is not maintained by the DHCPv6 server"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q9
+  {
+    question: "Which entry should appear in the ARP table on Host1 when HSRP is configured?",
+    options: [
+      "The physical MAC address of R1",
+      "The virtual IP address and the virtual MAC address for HSRP group 1",
+      "The physical IP address of R2",
+      "The broadcast MAC address"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q10
+  {
+    question: "Which switching method begins forwarding a frame as soon as the destination MAC address has been received?",
+    options: [
+      "Store-and-forward",
+      "Fragment-free",
+      "Cut-through",
+      "Adaptive"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q11
+  {
+    question: "Which switching method begins forwarding only after the entire frame has been received and checked for errors?",
+    options: [
+      "Store-and-forward",
+      "Cut-through",
+      "Fast-forward",
+      "Latency-free"
     ],
     correct: [0],
     multi: false
   },
 
-  // ── Q17 ──────────────────────────────────────────────────────────
+  // Q12
   {
-    question: "What defines a host route on a Cisco router?",
+    question: "What is the basis for forwarding decisions made by a Layer 2 switch?",
     options: [
-      "An IPv4 static host route configuration uses a destination IP address of a specific device and a /32 subnet mask",
-      "A route that has a /0 mask",
-      "A route learned via RIP with a hop count of 1",
-      "A default gateway address"
+      "Destination IP address",
+      "Source port number",
+      "TCP header information",
+      "MAC address and port mappings in the CAM table"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q13
+  {
+    question: "What is a result when multiple Cisco LAN switches are interconnected?",
+    options: [
+      "Collision domains are eliminated across all switches",
+      "The broadcast domain expands to include all switches",
+      "VLANs are merged automatically",
+      "Port speed increases on all links"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q14
+  {
+    question: "An interface shows a line status of 'down' and a protocol status of 'down'. What does this indicate?",
+    options: [
+      "A Layer 2 problem",
+      "The interface is administratively down",
+      "A Layer 1 problem",
+      "The interface is operational"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q15
+  {
+    question: "An interface shows a line status of 'up' and a protocol status of 'down'. What does this indicate?",
+    options: [
+      "A Layer 2 problem",
+      "A Layer 1 problem",
+      "The interface is operational",
+      "The interface is disabled"
     ],
     correct: [0],
     multi: false
   },
 
-  // ── Q18 ──────────────────────────────────────────────────────────
+  // Q16
   {
-    question: "What else is required when configuring an IPv6 static route using a next-hop link-local address?",
+    question: "SW1 receives a frame but the destination MAC address is not in its MAC table. What action does SW1 take?",
     options: [
-      "Interface number and type",
-      "A username and password",
-      "An administrative distance of 1",
-      "A public IPv4 address"
+      "SW1 drops the frame",
+      "SW1 sends the frame to the default gateway",
+      "SW1 sends an ARP request",
+      "SW1 floods the frame out all ports except the incoming port"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q17
+  {
+    question: "A switch is rebooted after 'erase startup-config'. Why do VLANs 10 and 100 still appear?",
+    options: [
+      "They are part of the IOS image",
+      "They are stored in vlan.dat in flash memory",
+      "The switch is in VTP client mode",
+      "They are standard VLANs that cannot be removed"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q18
+  {
+    question: "Which VLAN type carries untagged traffic across a trunk link by default?",
+    options: [
+      "Management VLAN",
+      "Default VLAN",
+      "Native VLAN",
+      "Data VLAN"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q19
+  {
+    question: "Which VLAN is assigned an IP address to allow HTTP and SSH management access to a switch?",
+    options: [
+      "Management VLAN",
+      "Native VLAN",
+      "Voice VLAN",
+      "Default VLAN"
     ],
     correct: [0],
     multi: false
   },
 
-  // ── Q19 ──────────────────────────────────────────────────────────
+  // Q20
   {
-    question: "Which two authentication methods are used if the router is configured with WPA2? (Choose two.)",
+    question: "Which VLAN are all switch ports assigned to immediately after a switch boots up?",
     options: [
-      "Personal",
-      "Enterprise",
-      "Open",
-      "Shared"
+      "Native VLAN",
+      "Management VLAN",
+      "Data VLAN",
+      "Default VLAN"
     ],
-    correct: [0, 1],
+    correct: [3],
+    multi: false
+  },
+
+  // Q21
+  {
+    question: "Host A sends a frame to Host B through multiple routers. What is the source MAC address of the frame as it arrives at Host B?",
+    options: [
+      "MAC address of Host A",
+      "MAC address of the last router's exit interface",
+      "MAC address of the first switch",
+      "Virtual HSRP MAC address"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q23
+  {
+    question: "What is the purpose of the HQ command 'ip route 0.0.0.0 0.0.0.0 serial 0/1/1'?",
+    options: [
+      "Block all external traffic",
+      "Route traffic specifically to 10.10.0.0",
+      "Forward all unknown destination traffic to the Internet",
+      "Enable OSPF on the serial interface"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q24
+  {
+    question: "Which protocol is used to eliminate Layer 2 loops in a switched network?",
+    options: [
+      "Spanning Tree Protocol (STP)",
+      "VLAN Trunking Protocol (VTP)",
+      "EtherChannel",
+      "Hot Standby Router Protocol (HSRP)"
+    ],
+    correct: [0],
+    multi: false
+  },
+
+  // Q25
+  {
+    question: "A technician issues 'show vlan' but VLAN 99 does not appear. What is the most likely reason?",
+    options: [
+      "VLAN 99 is a reserved number",
+      "All ports in VLAN 99 are inactive",
+      "The switch is in VTP transparent mode",
+      "VLAN 99 has not yet been created"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q26
+  {
+    question: "Which two VTP modes allow a switch to create and delete VLANs? (Choose two.)",
+    options: [
+      "Client",
+      "Server",
+      "Off",
+      "Transparent"
+    ],
+    correct: [1, 3],
     multi: true
   },
 
-  // ── Q20 ──────────────────────────────────────────────────────────
+  // Q27
   {
-    question: "Which mitigation technique would prevent rogue servers from providing false IPv6 configuration parameters to clients?",
+    question: "Which three steps should be completed before moving a switch to a new VTP management domain? (Choose three.)",
     options: [
-      "Enabling DHCPv6 Guard",
-      "Turning on Port Security",
-      "Using BPDU Guard",
-      "Disabling DTP"
+      "Delete VLAN 1 from the switch",
+      "Configure the new VTP domain name",
+      "Reset the VTP revision counters",
+      "Select the VTP mode and version",
+      "Disable Spanning Tree Protocol"
+    ],
+    correct: [1, 2, 3],
+    multi: true
+  },
+
+  // Q28
+  {
+    question: "How are Rapid PVST+ port link types determined?",
+    options: [
+      "Manually by the administrator",
+      "Automatically by the switch",
+      "Via LACP negotiation",
+      "Based on the IP address assigned"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q29
+  {
+    question: "In a switched network topology, which ports will STP designate as designated ports?",
+    options: [
+      "fa0/13, fa0/21, fa0/10 — all ports on the Root Bridge",
+      "All ports that are currently in a blocked state",
+      "All non-root ports on non-root bridges",
+      "Only 100 Mbps ports in the topology"
     ],
     correct: [0],
     multi: false
   },
 
-  // ── Q21 ──────────────────────────────────────────────────────────
+  // Q30
   {
-    question: "A PC has sent an RS message to an IPv6 router. Which two pieces of information will the router send back? (Choose two.)",
+    question: "What happens to static routes on Ethernet multiaccess interfaces when CEF is disabled?",
     options: [
-      "Prefix length",
-      "Prefix",
-      "DNS server MAC address",
-      "The PC's new hostname"
+      "Static routes stop functioning entirely",
+      "Routing speed increases",
+      "Ethernet multiaccess interfaces require fully specified static routes",
+      "RIP is automatically enabled as a fallback"
     ],
-    correct: [0, 1],
+    correct: [2],
+    multi: false
+  },
+
+  // Q31
+  {
+    question: "What are two advantages of using static routes over dynamic routing protocols? (Choose two.)",
+    options: [
+      "Better scalability for large networks",
+      "Improved network security",
+      "Automatic adaptation to topology changes",
+      "Reduced router resource usage"
+    ],
+    correct: [1, 3],
     multi: true
   },
 
-  // ── Q22 ──────────────────────────────────────────────────────────
+  // Q32
   {
-    question: "A laptop fails to display any available wireless networks at a conference. The access point must be operating in which mode?",
+    question: "Which routing table entry represents a route configured as a static route via a next-hop address?",
     options: [
-      "Passive",
+      "C 10.16.2.0/24 is directly connected",
+      "S 0.0.0.0/0 [1/0] via 10.16.2.2",
+      "D 10.17.2.0/24 [90/2170112]",
+      "S 10.17.2.0/24 [1/0] via 10.16.2.2"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q33
+  {
+    question: "What is the effect of issuing the command 'spanning-tree portfast' on a switch interface?",
+    options: [
+      "It disables STP on the entire switch",
+      "It enables PortFast on that specific interface",
+      "It makes the switch the root bridge",
+      "It stops the interface from sending BPDUs"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q34
+  {
+    question: "What is the prefix used for IPv6 link-local addresses?",
+    options: [
+      "FE80::/10",
+      "2001::/3",
+      "FC00::/7",
+      "FF00::/8"
+    ],
+    correct: [0],
+    multi: false
+  },
+
+  // Q35
+  {
+    question: "Which two characteristics describe routed ports on a multilayer switch? (Choose two.)",
+    options: [
+      "They require 802.1Q dot1q encapsulation",
+      "They are not associated with any particular VLAN",
+      "They use the 'switchport mode access' command",
+      "They are typically configured between the core and distribution layers"
+    ],
+    correct: [1, 3],
+    multi: true
+  },
+
+  // Q36
+  {
+    question: "Inter-VLAN routing fails on a backup trunk link even though OSPF is up. What is the most likely cause?",
+    options: [
+      "The trunk link is configured as half-duplex",
+      "VTP is disabled on the backup link",
+      "The allowed VLANs are not configured correctly on the trunk",
+      "STP is blocking the backup trunk port"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q37
+  {
+    question: "Which command is used as the first step to configure an EtherChannel LACP bundle on two GigabitEthernet interfaces?",
+    options: [
+      "channel-group 1 mode desirable",
+      "switchport mode trunk",
+      "channel-protocol pagp",
+      "interface range GigabitEthernet 0/4 – 5"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q38
+  {
+    question: "A switch receives a frame with a multicast destination MAC address. What action does the switch take?",
+    options: [
+      "Drop the frame immediately",
+      "Forward the frame out all ports except the incoming port",
+      "Forward the frame to the default gateway",
+      "Add the multicast address to the MAC table"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q39
+  {
+    question: "A traceroute shows traffic taking an unexpected path despite a static route being configured. What should be checked first?",
+    options: [
+      "Check the exit interface specified in the static route",
+      "Reboot the router",
+      "Change the PC's IP address",
+      "Enable a dynamic routing protocol"
+    ],
+    correct: [0],
+    multi: false
+  },
+
+  // Q40
+  {
+    question: "Which three modes are valid PAgP EtherChannel configuration options? (Choose three.)",
+    options: [
       "Active",
-      "Mesh",
-      "Bridge"
+      "Auto",
+      "Desirable",
+      "On",
+      "Passive"
+    ],
+    correct: [1, 2, 3],
+    multi: true
+  },
+
+  // Q41
+  {
+    question: "Which command is used to remove a static route from a Cisco router's configuration?",
+    options: [
+      "delete ip route",
+      "clear ip route",
+      "no ip route",
+      "remove static-route"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q42
+  {
+    question: "A router is configured with the 'ip helper-address' command. What conclusion can be drawn about R1?",
+    options: [
+      "R1 is functioning as a DHCPv4 server",
+      "R1 is acting as a Wireless LAN Controller",
+      "R1 is using SLAAC for address assignment",
+      "R1 is configured as a DHCPv4 relay agent"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q43
+  {
+    question: "During the Cisco router boot sequence, which step involves loading the boot loader from ROM?",
+    options: [
+      "Step 1",
+      "Step 2",
+      "Step 4",
+      "Step 6"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q44
+  {
+    question: "PC1 is unable to receive an IP address from the DHCP server. What is the most likely cause?",
+    options: [
+      "The 'ip helper-address' command is applied on the wrong interface",
+      "The DHCP address pool is full",
+      "The router is in standby mode",
+      "There is an encapsulation mismatch"
     ],
     correct: [0],
     multi: false
   },
 
-  // ── Q23 ──────────────────────────────────────────────────────────
+  // Q45
   {
-    question: "Which three components are combined to form a bridge ID? (Choose three.)",
+    question: "Which two wireless settings create a security vulnerability in a network? (Choose two.)",
     options: [
-      "Bridge priority",
-      "Extended system ID",
-      "MAC address",
-      "IP address",
-      "Port ID"
+      "The transmit power level is set to maximum",
+      "The SSID is being broadcast",
+      "The 2.4 GHz frequency band is used",
+      "A well-known default administrator password is still set"
     ],
-    correct: [0, 1, 2],
+    correct: [1, 3],
     multi: true
   },
 
-  // ── Q24 ──────────────────────────────────────────────────────────
+  // Q46
   {
-    question: "On a Cisco 3504 WLC Summary page, which tab allows a network administrator to configure a particular WLAN with a WPA2 policy?",
+    question: "What are the SNMP messages called that are sent unsolicited from an agent to the NMS server?",
+    options: [
+      "Alerts",
+      "Packets",
+      "Traps",
+      "Logs"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q47
+  {
+    question: "Which tab on the Cisco WLC interface is used to create a new VLAN interface?",
     options: [
       "WLANs",
       "CONTROLLER",
       "WIRELESS",
       "SECURITY"
     ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q48
+  {
+    question: "Why should network administrators change the default DHCP IP address range on a wireless access point?",
+    options: [
+      "To increase wireless connection speed",
+      "To support more wireless clients simultaneously",
+      "To provide compatibility with 802.11ax",
+      "To reduce the chance of outsiders accessing the network using a well-known IP range"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q49
+  {
+    question: "Which two functions are handled by the WLC in a split-MAC WLAN architecture? (Choose two.)",
+    options: [
+      "Sending and receiving beacon frames",
+      "Frame translation to other protocols",
+      "Real-time MAC processing at the AP",
+      "Client association and re-association"
+    ],
+    correct: [1, 3],
+    multi: true
+  },
+
+  // Q50
+  {
+    question: "On which ports should BPDU Guard be enabled?",
+    options: [
+      "All PortFast-enabled ports",
+      "All trunk ports",
+      "Only the root port",
+      "The console port only"
+    ],
     correct: [0],
     multi: false
   },
 
-  /* ─────────────────────────────────────────────────────────────────
-     ↓ ВСТАВЬТЕ СЛЕДУЮЩИЕ ВОПРОСЫ СЮДА (по образцу выше)
-     Пример:
-     {
-       question: "Текст вопроса",
-       options: ["Вариант A", "Вариант B", "Вариант C", "Вариант D"],
-       correct: [0],        // индексы правильных ответов (0-based)
-       multi: false         // true если "Choose two/three"
-     },
-  ───────────────────────────────────────────────────────────────── */
+  // Q51
+  {
+    question: "Which threat does BPDU Guard help mitigate?",
+    options: [
+      "DHCP starvation attacks",
+      "MAC address flooding",
+      "Rogue switches being introduced to the network",
+      "VLAN hopping attacks"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q52
+  {
+    question: "Why is DHCP snooping required for Dynamic ARP Inspection (DAI) to function correctly?",
+    options: [
+      "It prevents MAC address table overflow",
+      "It uses the DHCP snooping binding database to validate ARP packets",
+      "It accelerates DTP negotiation",
+      "It encrypts ARP traffic on the network"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q53
+  {
+    question: "Traffic is still using a backup path despite OSPF being established on the primary link. What change will fix this?",
+    options: [
+      "Change the administrative distance to 1",
+      "Disable CEF on the router",
+      "Change the next-hop address",
+      "Change the administrative distance of the static route to 120"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q54
+  {
+    question: "What is the metric value shown in the routing table for the IPv6 route 2001:DB8:ACAD:E::/64?",
+    options: [
+      "2682112",
+      "1",
+      "110",
+      "90"
+    ],
+    correct: [0],
+    multi: false
+  },
+
+  // Q55
+  {
+    question: "Which three items must be configured on a switch to allow remote management access? (Choose three.)",
+    options: [
+      "A loopback interface address",
+      "An IP address on the management VLAN",
+      "A DNS server address",
+      "Configured vty lines",
+      "A default gateway address"
+    ],
+    correct: [1, 3, 4],
+    multi: true
+  },
+
+  // Q56
+  {
+    question: "Which command allows an IPv6 router to respond to stateless DHCPv6 requests from clients?",
+    options: [
+      "ipv6 unicast-routing",
+      "ipv6 dhcp server",
+      "ipv6 nd other-config-flag",
+      "ipv6 address autoconfig"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q57
+  {
+    question: "Which two commands are required when configuring inter-VLAN routing on a Layer 3 switch? (Choose two.)",
+    options: [
+      "switchport mode trunk",
+      "no switchport on the routed interface",
+      "vtp client",
+      "ip routing"
+    ],
+    correct: [1, 3],
+    multi: true
+  },
+
+  // Q58
+  {
+    question: "A network admin wants to split traffic across two frequency bands. Which two assignments should be made? (Choose two.)",
+    options: [
+      "Use WEP encryption on both bands",
+      "Assign 5 GHz for high-bandwidth streaming",
+      "Disable the 5 GHz band entirely",
+      "Assign 2.4 GHz for basic low-bandwidth traffic"
+    ],
+    correct: [1, 3],
+    multi: true
+  },
+
+  // Q59
+  {
+    question: "After switching to a new ISP, users have no Internet connectivity. What is the most likely fix?",
+    options: [
+      "Remove the old default static route from the edge routers",
+      "Change the internal IP address range",
+      "Reset the Wireless LAN Controller",
+      "Verify the STP root bridge election"
+    ],
+    correct: [0],
+    multi: false
+  },
+
+  // Q60
+  {
+    question: "On what basis does a switch populate its MAC address table?",
+    options: [
+      "Destination MAC address and outgoing port",
+      "Source IP address of the frame",
+      "VLAN ID only",
+      "Source MAC address and the incoming port"
+    ],
+    correct: [3],
+    multi: false
+  },
+  // Q61
+  {
+    question: "Which Cisco proprietary protocol is used to group physical ports into a logical link?",
+    options: [
+      "LACP",
+      "DTP",
+      "PAgP",
+      "STP"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q62
+  {
+    question: "Which type of static route uses a greater administrative distance to serve as a backup route?",
+    options: [
+      "Default static route",
+      "Floating static route",
+      "Summary static route",
+      "Host route"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q63
+  {
+    question: "A switch receives a frame with a unicast destination MAC address that exists in its MAC table. What action does the switch take?",
+    options: [
+      "Flood the frame to all ports",
+      "Drop the frame",
+      "Forward the frame out the specified port",
+      "Send the frame to the CPU"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q64
+  {
+    question: "Which static route command should be entered on R2 to reach PCB on the 172.16.2.0/24 network?",
+    options: [
+      "ip route 172.16.3.0 255.255.255.0 172.16.2.1",
+      "ip route 0.0.0.0 0.0.0.0 S0/0/0",
+      "ip route 172.16.2.0 255.255.255.0 S0/0/1",
+      "ip route 172.16.2.0 255.255.255.0 172.16.3.1"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q65
+  {
+    question: "Which technology allows simultaneous transmission over redundant switch links without STP blocking any ports?",
+    options: [
+      "EtherChannel",
+      "VTP",
+      "HSRP",
+      "STP blocking"
+    ],
+    correct: [0],
+    multi: false
+  },
+
+  // Q66
+  {
+    question: "Host A sends an ARP request out Fa0/4 on a trunk link. Which three hosts will receive the broadcast? (Choose three.)",
+    options: [
+      "Host B",
+      "Host C",
+      "Host D",
+      "Host F",
+      "Host G"
+    ],
+    correct: [1, 2, 3],
+    multi: true
+  },
+
+  // Q67
+  {
+    question: "Ping between two switches is failing. What is the most likely fix?",
+    options: [
+      "Change the subnet masks on both switches",
+      "Configure the trunk link in dynamic desirable mode",
+      "Disable Spanning Tree Protocol",
+      "Use a crossover cable"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q68
+  {
+    question: "What is the effect of issuing the 'shutdown' command on an unused switch port?",
+    options: [
+      "It resets the switch",
+      "It clears the MAC address table",
+      "It reloads the IOS",
+      "It disables the unused port"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q69
+  {
+    question: "What is the primary reason an attacker launches a MAC address table overflow attack?",
+    options: [
+      "To crash the switch hardware",
+      "To gain administrative access to the switch",
+      "To bypass a firewall",
+      "To see frames destined for other hosts on the network"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q70
+  {
+    question: "When is AAA Authorization implemented in the authentication process?",
+    options: [
+      "Before the user enters a password",
+      "Immediately after successful authentication",
+      "After AAA accounting is completed",
+      "After the user logs out"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q71
+  {
+    question: "Which port security feature dynamically learns MAC addresses and adds them to the running configuration?",
+    options: [
+      "Dynamic ARP Inspection",
+      "Sticky Port Security",
+      "DHCP Snooping",
+      "Static MAC assignment"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q72
+  {
+    question: "Which three Wi-Fi standards operate in the 2.4 GHz frequency band? (Choose three.)",
+    options: [
+      "802.11ac",
+      "802.11a",
+      "802.11b",
+      "802.11g",
+      "802.11n"
+    ],
+    correct: [2, 3, 4],
+    multi: true
+  },
+
+  // Q73
+  {
+    question: "Which two pieces of information are displayed by the 'show spanning-tree' command? (Choose two.)",
+    options: [
+      "The IP address of the root bridge",
+      "The VTP revision number",
+      "The BID of the root bridge",
+      "The role of ports across all VLANs"
+    ],
+    correct: [2, 3],
+    multi: true
+  },
+
+  // Q74
+  {
+    question: "After the root bridge election, which trunk link will STP place in a non-forwarding state?",
+    options: [
+      "Trunk1",
+      "Management Trunk",
+      "All trunks",
+      "Trunk2"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q75
+  {
+    question: "Which IPv6 address assignment method uses Router Advertisement messages to provide prefix information to hosts?",
+    options: [
+      "Stateful DHCPv6",
+      "SLAAC",
+      "Static assignment",
+      "EUI-64 only"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q76
+  {
+    question: "Which two protocols are used by server-based AAA implementations? (Choose two.)",
+    options: [
+      "TACACS+",
+      "SNMP",
+      "SSH",
+      "RADIUS"
+    ],
+    correct: [0, 3],
+    multi: true
+  },
+
+  // Q77
+  {
+    question: "What is the primary security reason for disabling SSID broadcast on a wireless network?",
+    options: [
+      "To increase the wireless data rate",
+      "To eliminate outsiders from scanning for available SSIDs",
+      "To force the AP to use 5 GHz only",
+      "To comply with 802.11i standards"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q78
+  {
+    question: "Which security feature prevents rogue DHCP servers from assigning IP addresses on a network?",
+    options: [
+      "DHCP Snooping",
+      "BPDU Guard",
+      "Port Security",
+      "DTP"
+    ],
+    correct: [0],
+    multi: false
+  },
+
+  // Q79
+  {
+    question: "Which port security violation mode drops frames from unknown MAC addresses and logs the event to syslog without shutting the port?",
+    options: [
+      "Protect",
+      "Shutdown",
+      "Restrict",
+      "Disabled"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q80
+  {
+    question: "Which First Hop Redundancy Protocol uses the concepts of an active router and a standby router within a group?",
+    options: [
+      "VRRP",
+      "GLBP",
+      "EtherChannel",
+      "HSRP"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q81
+  {
+    question: "A router throws an overlapping subnets error. What is the most likely cause?",
+    options: [
+      "The router is in VTP transparent mode",
+      "VTP domain name mismatch",
+      "No 802.1Q encapsulation configured",
+      "RTA is using the same subnet address for VLAN 20 and VLAN 30"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q82
+  {
+    question: "Which three trunk negotiation combinations will result in a functional trunk link? (Choose three.)",
+    options: [
+      "Dynamic auto – Dynamic auto",
+      "Dynamic desirable – Dynamic auto",
+      "Dynamic desirable – Dynamic desirable",
+      "Trunk – Dynamic desirable"
+    ],
+    correct: [1, 2, 3],
+    multi: true
+  },
+
+  // Q83
+  {
+    question: "What is the recommended solution for a small network that needs Internet access without the complexity of dynamic routing protocols?",
+    options: [
+      "Enable OSPF on all routers",
+      "Configure VTP server mode",
+      "Enable HSRP on all interfaces",
+      "Use static routes and a default route"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q84
+  {
+    question: "Which three channels are the non-overlapping channels available for 802.11g wireless networks?",
+    options: [
+      "1, 2, 3",
+      "6, 7, 8",
+      "1, 6, 11",
+      "11, 12, 13"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q85
+  {
+    question: "What credential does a client use when connecting to a WPA2 PSK wireless network?",
+    options: [
+      "A username and password combination",
+      "A digital certificate",
+      "A key that matches the key configured on the AP",
+      "The client's MAC address"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q86
+  {
+    question: "In an RSTP topology, which port roles are assigned: alternate, designated, root, and root?",
+    options: [
+      "All ports are designated",
+      "Root, root, root, root",
+      "Alternate, alternate, root, root",
+      "Alternate, designated, root, root"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q87
+  {
+    question: "RIP has an administrative distance of 120. Which command creates a static backup route for 172.16.1.0/24 that only activates if RIP fails?",
+    options: [
+      "ip route 172.16.1.0 255.255.255.0 s0/0/0 121",
+      "ip route 172.16.1.0 255.255.255.0 s0/0/0 10",
+      "ip route 172.16.1.0 255.255.255.0 110",
+      "ip route 0.0.0.0 0.0.0.0 121"
+    ],
+    correct: [0],
+    multi: false
+  },
+
+  // Q88
+  {
+    question: "Which security feature should be enabled to thwart a MAC address table overflow DoS attack?",
+    options: [
+      "BPDU Guard",
+      "Enable port security",
+      "Disable trunking on all ports",
+      "Use a Layer 3 switch"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q89
+  {
+    question: "Why does the 5 GHz Wi-Fi band generally offer better performance than 2.4 GHz?",
+    options: [
+      "It provides longer range than 2.4 GHz",
+      "It is backward compatible with 802.11b",
+      "It requires less power to transmit",
+      "It has more available channels and is less congested than 2.4 GHz"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q90
+  {
+    question: "After receiving a DHCPOFFER, what message does a client send to formally accept the offered IP address?",
+    options: [
+      "DHCPREQUEST",
+      "DHCPDISCOVER",
+      "DHCPOFFER",
+      "DHCPACK"
+    ],
+    correct: [0],
+    multi: false
+  },
+
+  // Q91
+  {
+    question: "When a host sends a frame to its default gateway in an HSRP environment, what is the destination MAC address of that frame?",
+    options: [
+      "The MAC address of router R1",
+      "The MAC address of the virtual HSRP router",
+      "The MAC address of the sending workstation",
+      "The broadcast MAC address"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q92
+  {
+    question: "Which mechanism does an IPv6 host use to verify that its newly configured address is unique on the network?",
+    options: [
+      "Checking the ARP cache",
+      "Contacting the WLC",
+      "Sending an ICMPv6 neighbor solicitation message",
+      "Sending a DHCPv6 REQUEST message"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q93
+  {
+    question: "A DHCP client receives multiple offers. Which DHCP message does the client broadcast to identify the selected server and formally request the offered address?",
+    options: [
+      "DHCPDISCOVER",
+      "DHCPOFFER",
+      "DHCPACK",
+      "DHCPREQUEST"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q94
+  {
+    question: "Which protocol should be used to establish a secure encrypted remote connection to a Cisco router?",
+    options: [
+      "SSH",
+      "Telnet",
+      "HTTP",
+      "TFTP"
+    ],
+    correct: [0],
+    multi: false
+  },
+
+  // Q95
+  {
+    question: "PC2 in VLAN 5 cannot communicate with PC1 during inter-VLAN routing. What is the most likely cause?",
+    options: [
+      "The router is in standby mode",
+      "A routed port is misconfigured",
+      "No native VLAN is defined",
+      "The 'encapsulation dot1Q 5' command specifies the wrong VLAN"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q96
+  {
+    question: "What does the missing parameter in the command 'encapsulation dot1q ?' identify?",
+    options: [
+      "The IP address of the subinterface",
+      "The subinterface ID number",
+      "The VLAN number",
+      "The interface priority"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q97
+  {
+    question: "Which DHCP message is sent by a server in response to a client's initial discovery message?",
+    options: [
+      "DHCPOFFER",
+      "DHCPDISCOVER",
+      "DHCPACK",
+      "DHCPREQUEST"
+    ],
+    correct: [0],
+    multi: false
+  },
+
+  // Q98
+  {
+    question: "Which type of attack exhausts the DHCP address pool, preventing legitimate clients from obtaining a lease?",
+    options: [
+      "DHCP spoofing",
+      "DHCP starvation",
+      "MAC address flooding",
+      "VLAN hopping"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q99
+  {
+    question: "A network admin forgets to exclude the default gateway IP from the DHCP pool. What is the consequence?",
+    options: [
+      "DNS resolution will fail for all clients",
+      "The router will crash",
+      "A conflict may occur if that IP is dynamically assigned to a client",
+      "Internet access will be blocked"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q100
+  {
+    question: "Which two configuration steps are required on a router interface to allow DHCP service for a new subnet? (Choose two.)",
+    options: [
+      "ip helper-address 10.2.0.250",
+      "service dhcp",
+      "interface G0/0",
+      "ip dhcp pool NEW"
+    ],
+    correct: [0, 2],
+    multi: true
+  },
+
+  // Q101
+  {
+    question: "Which technology provides load balancing by distributing traffic across multiple physical links based on source and destination IP?",
+    options: [
+      "STP",
+      "EtherChannel",
+      "VTP",
+      "HSRP"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q102
+  {
+    question: "Which protocol should be disabled on trunk ports to mitigate VLAN hopping attacks?",
+    options: [
+      "STP",
+      "DTP",
+      "LLDP",
+      "CDP"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q103
+  {
+    question: "Which protocol requires switches to be configured in either server or client mode to function?",
+    options: [
+      "VTP",
+      "STP",
+      "PAgP",
+      "LACP"
+    ],
+    correct: [0],
+    multi: false
+  },
+
+  // Q104
+  {
+    question: "Which two reasons justify using Layer 2 segmentation in a network? (Choose two.)",
+    options: [
+      "Enhance available bandwidth per user",
+      "Prevent all broadcast traffic entirely",
+      "Isolate traffic between different groups",
+      "Route between different subnets"
+    ],
+    correct: [0, 2],
+    multi: true
+  },
+
+  // Q105
+  {
+    question: "Which command allows a router to assign IPv6 link-local addresses without requiring a DHCPv6 server?",
+    options: [
+      "ipv6 address autoconfig",
+      "ipv6 nd other-config-flag",
+      "no shutdown",
+      "ipv6 unicast-routing"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q106
+  {
+    question: "Which type of switch port must be configured on the interface connected to the router in a router-on-a-stick inter-VLAN topology?",
+    options: [
+      "802.1Q trunk port",
+      "Access port",
+      "PortFast interface",
+      "DTP-disabled port"
+    ],
+    correct: [0],
+    multi: false
+  },
+
+  // Q107
+  {
+    question: "Which three actions help mitigate VLAN hopping attacks? (Choose three.)",
+    options: [
+      "Use VLAN 1 for all data traffic",
+      "Enable trunking manually on all trunk links",
+      "Disable DTP on non-trunk interfaces",
+      "Assign an unused VLAN as the native VLAN on trunks",
+      "Enable VTP pruning"
+    ],
+    correct: [1, 2, 3],
+    multi: true
+  },
+
+  // Q108
+  {
+    question: "What is the first message a DHCPv4 client sends when it needs an IP address?",
+    options: [
+      "DHCPOFFER",
+      "DHCPREQUEST",
+      "DHCPACK",
+      "DHCPDISCOVER"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q109
+  {
+    question: "What useful information does the 'show interfaces' command provide on a switch?",
+    options: [
+      "The current VTP revision number",
+      "The HSRP state of the interface",
+      "The OSPF neighbor relationships",
+      "The number of packets dropped from an attached host"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q110
+  {
+    question: "What is the key advantage of using a centralized AAA server over a local database?",
+    options: [
+      "Centralized AAA requires constant Internet connectivity",
+      "Centralized AAA is less secure than local databases",
+      "Centralized AAA eliminates the need for secret passwords",
+      "Centralized AAA is more scalable than a local database"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q111
+  {
+    question: "A DHCP client receives multiple DHCPOFFER messages. What does the client do next?",
+    options: [
+      "Accepts all offered addresses simultaneously",
+      "Sends a DHCPREQUEST that identifies the accepted offer",
+      "Drops all offers and sends a new DHCPDISCOVER",
+      "Ignores all remaining offers without responding"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q112
+  {
+    question: "Examining 'show port-security interface fa0/2' output, which three conclusions can be drawn? (Choose three.)",
+    options: [
+      "The port is configured as a trunk",
+      "Port security is administratively disabled",
+      "The port is in an up state",
+      "The violation mode is shutdown",
+      "The port mode is access"
+    ],
+    correct: [2, 3, 4],
+    multi: true
+  },
+
+  // Q113
+  {
+    question: "Which wireless security standard depends on a RADIUS server for authentication?",
+    options: [
+      "WPA2 Personal",
+      "WEP",
+      "WPA2 Enterprise",
+      "Open authentication"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q114
+  {
+    question: "A user is attempting a double-tagging VLAN hopping attack. What is the most effective countermeasure?",
+    options: [
+      "Disable all trunk links on the switch",
+      "Use only VLAN 1 for all traffic",
+      "Replace the switch with a hub",
+      "Ensure the user's VLAN is different from the native VLAN on all trunk links"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q115
+  {
+    question: "A 'show etherchannel summary' output shows flags 'SD' on port-channel 2. What two conclusions can be drawn? (Choose two.)",
+    options: [
+      "LACP is functioning normally",
+      "The bundle ports are all active",
+      "The EtherChannel is in a down state",
+      "The port-channel ID is 2"
+    ],
+    correct: [2, 3],
+    multi: true
+  },
+
+  // Q116
+  {
+    question: "In HSRP operation, what happens in Step 3 when the active router fails?",
+    options: [
+      "The router failure is logged to syslog",
+      "All routers stop sending hello messages",
+      "The standby router assumes the role of the forwarding router",
+      "A new HSRP election process begins from scratch"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q117
+  {
+    question: "Which tab on the Cisco WLC interface allows an admin to configure a WPA2 security policy on a specific WLAN?",
+    options: [
+      "WLANs",
+      "CONTROLLER",
+      "WIRELESS",
+      "MANAGEMENT"
+    ],
+    correct: [0],
+    multi: false
+  },
+
+  // Q118
+  {
+    question: "Which command correctly configures an IPv6 default static route via Serial 0/1/1?",
+    options: [
+      "ipv6 route 2001:db8::/32 serial 0/1/1",
+      "ip route 0.0.0.0 0.0.0.0 serial 0/1/1",
+      "ipv6 route ::/128 serial 0/1/1",
+      "ipv6 route ::/0 serial 0/1/1"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q119
+  {
+    question: "Users experience sporadic Internet outages every afternoon. What should the network admin check first?",
+    options: [
+      "The VTP domain password",
+      "Whether any VLANs have been deleted",
+      "Whether the default route is over-saturated at peak hours",
+      "Whether any switches need to be rebooted"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q120
+  {
+    question: "A switch detects that a known MAC address has moved to a different port. What action does the switch take?",
+    options: [
+      "Drops all frames from that MAC address",
+      "Disables the new interface",
+      "Logs a port security violation",
+      "Replaces the old MAC table entry with the more current port"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q121
+  {
+    question: "Why would a network administrator deploy a Wireless LAN Controller (WLC)?",
+    options: [
+      "To increase the wireless signal range",
+      "To facilitate centralized configuration and management of multiple WLANs",
+      "To eliminate the need for switches",
+      "To provide PoE directly to wireless clients"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q122
+  {
+    question: "Which three steps are required to configure inter-VLAN routing on a Layer 3 switch? (Choose three.)",
+    options: [
+      "Disabling Spanning Tree Protocol",
+      "Creating SVI interfaces for each VLAN",
+      "Configuring RIP as the routing protocol",
+      "Enabling IP routing on the switch",
+      "Assigning switch ports to the appropriate VLANs"
+    ],
+    correct: [1, 3, 4],
+    multi: true
+  },
+
+  // Q123
+  {
+    question: "Which three statements are true about duplex and speed settings on a Cisco 2960 switch? (Choose three.)",
+    options: [
+      "All ports default to half-duplex",
+      "Speed and duplex settings cannot be changed",
+      "Autonegotiation mismatches can cause performance issues",
+      "1000 Mb/s ports operate in full-duplex",
+      "Speed and duplex can be manually configured"
+    ],
+    correct: [2, 3, 4],
+    multi: true
+  },
+
+  // Q124
+  {
+    question: "PC1 in VLAN 10 and PC2 in VLAN 20 cannot communicate. What is the most likely cause?",
+    options: [
+      "The router is powered down",
+      "VTP is in transparent mode",
+      "Both PCs are on the same subnet",
+      "The encapsulation is misconfigured on a router subinterface"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q125
+  {
+    question: "BPDU Guard is not automatically active on access ports. What is the most likely reason?",
+    options: [
+      "The switch is configured as a root bridge",
+      "VTP is disabled on the switch",
+      "PortFast has not been configured on those access ports",
+      "The ports are in trunk mode"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q126
+  {
+    question: "Which two spanning-tree protocols use only one instance for the entire network, leading to suboptimal traffic paths? (Choose two.)",
+    options: [
+      "RSTP",
+      "STP",
+      "PVST+",
+      "MSTP"
+    ],
+    correct: [0, 1],
+    multi: true
+  },
+
+  // Q127
+  {
+    question: "A host is configured with 'ipv6 address dhcp'. Which type of IPv6 address assignment scheme is being used?",
+    options: [
+      "Stateless DHCPv6",
+      "SLAAC",
+      "Stateful DHCPv6",
+      "Static assignment"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q128
+  {
+    question: "Why is CAPWAP data traffic sometimes transmitted as plain text between the AP and WLC?",
+    options: [
+      "The AP is operating in Sniffer mode",
+      "The WLC certificate has expired",
+      "DTLS encryption is disabled by default on the CAPWAP data channel",
+      "No encryption algorithm is supported"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q129
+  {
+    question: "A new switch needs to receive VLAN information from a remote office VTP domain. Which two configurations are required? (Choose two.)",
+    options: [
+      "Configure the switch as a VTP server",
+      "Disable VTP entirely",
+      "Set the switch to VTP client mode",
+      "Configure the existing VTP domain name on the switch"
+    ],
+    correct: [2, 3],
+    multi: true
+  },
+
+  // Q130
+  {
+    question: "PC3 sends a DHCP broadcast request. Which ports does SW1 forward this frame out of?",
+    options: [
+      "All ports including the incoming port",
+      "The trunk port only",
+      "SW1 drops the broadcast",
+      "Fa0/1, Fa0/2, and Fa0/3 only"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q131
+  {
+    question: "A switch receives a frame with a source MAC address not currently in the MAC address table. What action does the switch take?",
+    options: [
+      "Flood the frame out all ports",
+      "Forward the frame to the default gateway",
+      "Add the source MAC address and incoming port to the MAC table",
+      "Drop the frame"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q132
+  {
+    question: "Users cannot connect to an internal web server. What is the first thing to check on the router?",
+    options: [
+      "The browser version on the client",
+      "The SSID and wireless password",
+      "The local DNS cache on clients",
+      "Interface status using 'show ip interface brief' to check for down interfaces"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q133
+  {
+    question: "What is the effect of entering the global command 'ip dhcp snooping' on a switch?",
+    options: [
+      "It marks a specific port as a trusted DHCP port",
+      "It creates a new DHCP address pool",
+      "It enables DHCP snooping globally on the switch",
+      "It sets a MAC address rate limit"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q134
+  {
+    question: "Packets are being dropped on a branch router. What is the most likely cause?",
+    options: [
+      "A VTP revision number mismatch",
+      "Poor wireless signal strength",
+      "A missing or incorrect static route",
+      "A faulty Ethernet cable"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q135
+  {
+    question: "Which two switch features help alleviate network congestion? (Choose two.)",
+    options: [
+      "Small MAC address tables",
+      "Low port density",
+      "Fast internal switching fabric",
+      "Large frame buffers"
+    ],
+    correct: [2, 3],
+    multi: true
+  },
+
+  // Q136
+  {
+    question: "What is the result of interconnecting multiple Layer 2 switches without VLANs?",
+    options: [
+      "The broadcast domain size increases to include all connected switches",
+      "The collision domain becomes larger",
+      "STP is automatically disabled",
+      "All links become trunk links"
+    ],
+    correct: [0],
+    multi: false
+  },
+
+  // Q138
+  {
+    question: "Network connectivity was lost since lunchtime. What is the first thing to verify?",
+    options: [
+      "The OSPF router ID",
+      "Verify the static route is still present in the routing table",
+      "Reboot the WLC",
+      "Check the DNS server location"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q139
+  {
+    question: "What is the effect of issuing the command 'switchport port-security' on an interface?",
+    options: [
+      "It enables port security on that specific interface",
+      "It sets the port to trunk mode",
+      "It limits the interface to 10 Mb/s",
+      "It enables SSH access on the port"
+    ],
+    correct: [0],
+    multi: false
+  },
+
+  // Q140
+  {
+    question: "What is the primary reason for deploying multiple lightweight access points in a network?",
+    options: [
+      "To support multiple different SSIDs per AP",
+      "To eliminate the need for a central switch",
+      "To allow centralized group management through a WLC",
+      "To reduce overall cabling costs"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q141
+  {
+    question: "PC-A and PC-B are both in VLAN 60 but cannot communicate across a trunk link. What is the most likely cause?",
+    options: [
+      "The switch is in VTP client mode",
+      "VLAN 60 is not in the allowed VLAN list on the trunk",
+      "IPv6 and IPv4 addresses are mixed",
+      "VLAN 60 is configured as the native VLAN"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q142
+  {
+    question: "What is the primary purpose of a RADIUS server in network authentication?",
+    options: [
+      "To host a public-facing website",
+      "To assign IP addresses to clients",
+      "To restrict network access to authorized users only",
+      "To monitor ambient temperature in the data center"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q143
+  {
+    question: "What is the effect of the command 'switchport mode access' on a switch interface?",
+    options: [
+      "It enables 802.1Q trunking",
+      "It assigns the port to the management VLAN",
+      "It creates an EtherChannel bundle",
+      "It disables DTP on the interface"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q144
+  {
+    question: "Which two configuration steps are needed so that clients receive DNS server information via stateless DHCPv6? (Choose two.)",
+    options: [
+      "Configure VTP server mode",
+      "Enable WPA3 on the wireless interface",
+      "Add a 'dns-server' line to the DHCPv6 pool",
+      "Configure the 'ipv6 nd other-config-flag' on the router interface"
+    ],
+    correct: [2, 3],
+    multi: true
+  },
+
+  // Q145
+  {
+    question: "What is the security benefit of disabling SSID broadcast on a wireless access point?",
+    options: [
+      "It saves power on the AP",
+      "It increases 2.4 GHz data rates",
+      "It eliminates outsiders from scanning and discovering the SSID",
+      "It limits the network to a maximum of 10 users"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q146
+  {
+    question: "An IPv6 static route is not providing connectivity. What is the most likely configuration error?",
+    options: [
+      "The administrative distance is too low",
+      "The next-hop is a multicast address",
+      "IPv6 unicast-routing is disabled",
+      "The exit interface specified is incorrect"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q147
+  {
+    question: "A switch receives a frame with a unicast destination MAC address that is NOT in the MAC address table. What does the switch do?",
+    options: [
+      "Forward the frame out all ports except the incoming port",
+      "Drop the frame immediately",
+      "Send a broadcast ARP request",
+      "Forward the frame to the root bridge"
+    ],
+    correct: [0],
+    multi: false
+  },
+
+  // Q148
+  {
+    question: "A traceroute shows an unexpected path despite a static route being configured. What should be verified?",
+    options: [
+      "The hostname configured on the router",
+      "The configuration of the exit interface in the static route",
+      "The MAC address table on the switch",
+      "The duplex setting on the PC's NIC"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q149
+  {
+    question: "What does the command 'ip arp inspection vlan 10' accomplish?",
+    options: [
+      "It blocks all ARP traffic on VLAN 10",
+      "It enables DAI on VLAN 10, validating ARP packets using the DHCP snooping binding table",
+      "It assigns an IP address to VLAN 10",
+      "It disables the MAC address table on VLAN 10"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q150
+  {
+    question: "Which protocol automatically negotiates trunk links between Cisco switches?",
+    options: [
+      "VTP",
+      "DTP",
+      "STP",
+      "LACP"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q151
+  {
+    question: "What is the purpose of using WPA2 with AES encryption?",
+    options: [
+      "To provide data privacy and integrity through strong encryption",
+      "To increase the wireless transmission range",
+      "To support legacy 802.11b devices",
+      "To hide the SSID from wireless scanners"
+    ],
+    correct: [0],
+    multi: false
+  },
+
+  // Q152
+  {
+    question: "A web server is unreachable from remote sites. What should the network admin verify first?",
+    options: [
+      "Reboot the switch connected to the server",
+      "Change the IP addresses on all devices",
+      "Verify that a static route to the server's network exists in the routing table",
+      "Disable STP on the access switch"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q153
+  {
+    question: "Which prefix is used for IPv6 link-local addresses?",
+    options: [
+      "2001::/3",
+      "fc00::/7",
+      "fe80::/10",
+      "ff00::/8"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q154
+  {
+    question: "What does the command 'ip dhcp snooping limit rate 6' enforce on a switch port?",
+    options: [
+      "Limits the port to a maximum of 6 connected devices",
+      "Restricts DHCP messages to 6 per second on that interface",
+      "Sets a 6-minute DHCP snooping session timeout",
+      "Limits the port to 6 assigned IP addresses"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q155
+  {
+    question: "Why should a network admin change the default DHCP IP address range on a wireless AP?",
+    options: [
+      "To achieve faster wireless connection speeds",
+      "To support more than 254 simultaneous users",
+      "To enable IPv6 routing on the AP",
+      "To reduce the chance of outsiders accessing the network using a well-known default IP range"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q156
+  {
+    question: "What does the command 'arp inspection validate src-mac' verify?",
+    options: [
+      "It checks the IP address against the MAC address in the ARP body",
+      "It disables all ARP traffic on the interface",
+      "It checks that the Layer 2 source MAC matches the sender MAC address in the ARP body",
+      "It changes the source MAC address in ARP replies"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q157
+  {
+    question: "Which Cisco proprietary protocol is automatically enabled on switch interfaces and negotiates trunking?",
+    options: [
+      "STP",
+      "DTP",
+      "LLDP",
+      "LACP"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q158
+  {
+    question: "Which destination network is used in an IPv6 default static route?",
+    options: [
+      "::/0",
+      "::1/128",
+      "fe80::/10",
+      "2001:db8::/32"
+    ],
+    correct: [0],
+    multi: false
+  },
+
+  // Q159
+  {
+    question: "Which two characteristics describe Cisco Express Forwarding (CEF)? (Choose two.)",
+    options: [
+      "CEF performs a full routing table lookup for every packet",
+      "CEF is slower than process switching",
+      "CEF is the fastest switching method available on Cisco routers",
+      "CEF uses a Forwarding Information Base (FIB) and an adjacency table"
+    ],
+    correct: [2, 3],
+    multi: true
+  },
+
+  // Q160
+  {
+    question: "In an 802.1X deployment, what role does the switch play?",
+    options: [
+      "Supplicant",
+      "Authenticator",
+      "Authentication server",
+      "Proxy agent"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+  // Q161
+  {
+    question: "Which security feature is specifically designed to prevent ARP spoofing attacks?",
+    options: [
+      "Dynamic ARP Inspection (DAI)",
+      "Port Security",
+      "DHCP Snooping",
+      "BPDU Guard"
+    ],
+    correct: [0],
+    multi: false
+  },
+
+  // Q162
+  {
+    question: "What is the primary advantage of PVST+ over traditional STP?",
+    options: [
+      "PVST+ uses less CPU than standard STP",
+      "PVST+ disables all redundant links",
+      "PVST+ is an open standard and non-proprietary",
+      "PVST+ enables performance optimization and load sharing across VLANs"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q163
+  {
+    question: "Which redundancy protocol uses the concept of a standby router automatically assuming the forwarding role?",
+    options: [
+      "VRRP",
+      "OSPF",
+      "EtherChannel",
+      "HSRP"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q164
+  {
+    question: "What information does the 'show ip dhcp snooping binding' command display?",
+    options: [
+      "The DHCP pool address range",
+      "The current VTP domain name",
+      "A list of blocked MAC addresses",
+      "IP-to-MAC address associations learned via DHCP snooping"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q165
+  {
+    question: "A frame arrives at a switch with a source MAC address already listed in the MAC table. What does the switch do?",
+    options: [
+      "Drops the frame to prevent duplicates",
+      "Adds a duplicate entry to the table",
+      "Updates the refresh timer for that MAC table entry",
+      "Floods the frame out all ports"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q166
+  {
+    question: "What is the most effective way to reduce the number of devices receiving broadcast traffic?",
+    options: [
+      "Replace all switches with hubs",
+      "Disable Spanning Tree Protocol",
+      "Use a single large VLAN for all devices",
+      "Segment the LAN into smaller networks and route between them"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q167
+  {
+    question: "What defines a host route on a Cisco router?",
+    options: [
+      "A route with a /0 mask that matches all traffic",
+      "A route learned via RIP with a hop count of 1",
+      "A default gateway address pointing to the ISP",
+      "A static route using a specific device IP address with a /32 subnet mask"
+    ],
+    correct: [3],
+    multi: false
+  },
+
+  // Q168
+  {
+    question: "What additional parameter is required when configuring an IPv6 static route using a next-hop link-local address?",
+    options: [
+      "A username and password for authentication",
+      "An administrative distance of 1",
+      "The exit interface number and type",
+      "A public IPv4 address"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q169
+  {
+    question: "Which two authentication methods are supported when a router is configured with WPA2? (Choose two.)",
+    options: [
+      "Open authentication",
+      "Personal (PSK)",
+      "Shared key authentication",
+      "Enterprise (802.1X)"
+    ],
+    correct: [1, 3],
+    multi: true
+  },
+
+  // Q170
+  {
+    question: "Which mitigation technique prevents rogue servers from providing false IPv6 configuration parameters to clients?",
+    options: [
+      "Enabling Port Security",
+      "Using BPDU Guard",
+      "Enabling DHCPv6 Guard",
+      "Disabling DTP"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q171
+  {
+    question: "A PC sends an RS message to an IPv6 router. Which two pieces of information will the router include in its RA reply? (Choose two.)",
+    options: [
+      "The DNS server's MAC address",
+      "The PC's new hostname",
+      "The IPv6 prefix",
+      "The prefix length"
+    ],
+    correct: [2, 3],
+    multi: true
+  },
+
+  // Q172
+  {
+    question: "A laptop at a conference cannot detect any wireless networks. In which mode must the access point be operating?",
+    options: [
+      "Active mode",
+      "Mesh mode",
+      "Passive mode",
+      "Bridge mode"
+    ],
+    correct: [2],
+    multi: false
+  },
+
+  // Q173
+  {
+    question: "Which three components are combined to form a bridge ID in STP? (Choose three.)",
+    options: [
+      "IP address",
+      "Port ID",
+      "Bridge priority",
+      "Extended system ID",
+      "MAC address"
+    ],
+    correct: [2, 3, 4],
+    multi: true
+  },
+
+  // Q174
+  {
+    question: "On a Cisco 3504 WLC Summary page, which tab allows configuration of a WPA2 policy on a specific WLAN?",
+    options: [
+      "CONTROLLER",
+      "WLANs",
+      "WIRELESS",
+      "SECURITY"
+    ],
+    correct: [1],
+    multi: false
+  },
+
+
+  
 
 ];
 
