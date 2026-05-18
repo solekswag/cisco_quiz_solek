@@ -1,13 +1,15 @@
+Вот обновленный HTML-код с экраном выбора пакетов вопросов. Вы можете скопировать его и вставить свой массив вопросов в указанное место.
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SRWE Exam Quiz</title>
+<title>SRWE Exam Quiz • Flexible Packs</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
-  /* ─── Reset & Variables ─────────────────────────────────────────── */
+  /* ─── Reset & Variables (same style + menu enhancements) ─────────────────── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
@@ -15,8 +17,8 @@
     --surface:   #161922;
     --card:      #1c2030;
     --border:    #252a3a;
-    --accent: #3a3f50;
-    --accent2: #3a3f50;
+    --accent:    #4f8fff;
+    --accent2:   #7c5cfc;
     --correct:   #22c55e;
     --wrong:     #ef4444;
     --text:      #e8ecf5;
@@ -38,21 +40,35 @@
     align-items: center;
     padding: 24px 16px 48px;
     overflow-x: hidden;
+    position: relative;
   }
 
-  /* ─── Background glow ───────────────────────────────────────────── */
- 
-    content: '';
+  /* background aesthetic (same as original but refined) */
+  body::after {
+    content: "";
     position: fixed;
     inset: 0;
-    background:
-      radial-gradient(ellipse 60% 40% at 20% 10%, rgba(79,143,255,.07) 0%, transparent 70%),
-      radial-gradient(ellipse 50% 35% at 80% 85%, rgba(124,92,252,.07) 0%, transparent 70%);
+    background-image: url("https://i.pinimg.com/736x/77/19/00/77190088c8605dde08fdd0b3ab1a5441.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 700px;
+    opacity: 0.12;
     pointer-events: none;
     z-index: 0;
   }
 
-  /* ─── Header ────────────────────────────────────────────────────── */
+  /* radial glow */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 10%, rgba(79,143,255,.08) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 35% at 80% 85%, rgba(124,92,252,.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
   .app-header {
     width: 100%;
     max-width: 760px;
@@ -61,7 +77,7 @@
     justify-content: space-between;
     padding: 0 0 32px;
     position: relative;
-    z-index: 1;
+    z-index: 2;
   }
 
   .logo {
@@ -79,7 +95,7 @@
   .logo-title {
     font-size: 22px;
     font-weight: 800;
-    background: #2a2f3f;
+    background: linear-gradient(135deg, #b9c8ff, #a18eff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -96,15 +112,107 @@
     font-family: var(--mono);
   }
 
-  /* ─── Main card wrapper ─────────────────────────────────────────── */
   .quiz-wrap {
     width: 100%;
     max-width: 760px;
     position: relative;
-    z-index: 1;
+    z-index: 2;
   }
 
-  /* ─── Progress ──────────────────────────────────────────────────── */
+  /* ─── MODERN MENU PANEL (start screen) ───────────────────────────────── */
+  .menu-screen {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px 28px;
+    backdrop-filter: blur(2px);
+    transition: all 0.3s ease;
+  }
+  .menu-title {
+    font-size: 28px;
+    font-weight: 800;
+    text-align: center;
+    background: linear-gradient(135deg, #e8ecf5, #a2b5ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+  }
+  .menu-desc {
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 32px;
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 16px;
+  }
+  .pack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .pack-btn {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 40px;
+    padding: 14px 12px;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    backdrop-filter: blur(4px);
+  }
+  .pack-btn span {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: rgba(79,143,255,0.2);
+    padding: 2px 10px;
+    border-radius: 40px;
+    color: var(--accent);
+  }
+  .pack-btn:hover {
+    border-color: var(--accent);
+    background: rgba(79,143,255,0.1);
+    transform: translateY(-3px);
+  }
+  .pack-btn.special {
+    background: linear-gradient(135deg, rgba(79,143,255,0.2), rgba(124,92,252,0.2));
+    border-color: var(--accent2);
+  }
+  .full-exam {
+    grid-column: span 2;
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+  .full-exam span {
+    background: rgba(255,255,255,0.2);
+    color: white;
+  }
+  .random-btn {
+    background: rgba(34,197,94,0.1);
+    border-color: #22c55e55;
+  }
+  .random-btn span {
+    background: #22c55e22;
+    color: #86efac;
+  }
+  .menu-footer-note {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 24px;
+    font-family: var(--mono);
+  }
+
+  /* quiz elements (reused from original) */
   .progress-row {
     display: flex;
     align-items: center;
@@ -129,11 +237,7 @@
     font-size: 12px;
     color: var(--muted);
     white-space: nowrap;
-    min-width: 60px;
-    text-align: right;
   }
-
-  /* ─── Score strip ───────────────────────────────────────────────── */
   .score-strip {
     display: flex;
     gap: 10px;
@@ -149,8 +253,6 @@
   }
   .score-chip.correct { color: var(--correct); border-color: rgba(34,197,94,.3); }
   .score-chip.wrong   { color: var(--wrong);   border-color: rgba(239,68,68,.3);  }
-
-  /* ─── Question card ─────────────────────────────────────────────── */
   .question-card {
     background: var(--card);
     border: 1px solid var(--border);
@@ -160,7 +262,6 @@
     transition: opacity .3s ease, transform .3s ease;
   }
   .question-card.fade-out { opacity: 0; transform: translateY(6px); }
-
   .q-meta {
     display: flex;
     align-items: center;
@@ -187,21 +288,17 @@
     border-radius: 6px;
     border: 1px solid rgba(124,92,252,.25);
   }
-
   .question-text {
     font-size: 17px;
     font-weight: 600;
     line-height: 1.55;
     color: var(--text);
   }
-
-  /* ─── Options ───────────────────────────────────────────────────── */
   .options-list {
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
-
   .option-btn {
     display: flex;
     align-items: flex-start;
@@ -218,16 +315,12 @@
     font-size: 14.5px;
     font-weight: 400;
     transition: border-color .18s, background .18s, transform .12s;
-    position: relative;
-    overflow: hidden;
   }
   .option-btn:not([disabled]):hover {
     border-color: var(--accent);
     background: rgba(79,143,255,.07);
     transform: translateX(3px);
   }
-  .option-btn:not([disabled]):active { transform: translateX(3px) scale(.99); }
-
   .opt-letter {
     flex-shrink: 0;
     width: 26px;
@@ -243,41 +336,14 @@
     color: var(--muted);
     transition: background .18s, color .18s;
   }
-
-  .option-btn.selected-correct {
-    border-color: var(--correct);
-    background: rgba(34,197,94,.08);
-  }
-  .option-btn.selected-correct .opt-letter {
-    background: var(--correct);
-    color: #fff;
-  }
-  .option-btn.selected-wrong {
-    border-color: var(--wrong);
-    background: rgba(239,68,68,.08);
-  }
-  .option-btn.selected-wrong .opt-letter {
-    background: var(--wrong);
-    color: #fff;
-  }
-  .option-btn.reveal-correct {
-    border-color: rgba(34,197,94,.4);
-    background: rgba(34,197,94,.04);
-  }
-  .option-btn.reveal-correct .opt-letter {
-    background: rgba(34,197,94,.2);
-    color: var(--correct);
-  }
+  .option-btn.selected-correct { border-color: var(--correct); background: rgba(34,197,94,.08); }
+  .option-btn.selected-correct .opt-letter { background: var(--correct); color: #fff; }
+  .option-btn.selected-wrong { border-color: var(--wrong); background: rgba(239,68,68,.08); }
+  .option-btn.selected-wrong .opt-letter { background: var(--wrong); color: #fff; }
+  .option-btn.reveal-correct { border-color: rgba(34,197,94,.4); background: rgba(34,197,94,.04); }
+  .option-btn.reveal-correct .opt-letter { background: rgba(34,197,94,.2); color: var(--correct); }
   .option-btn[disabled] { cursor: default; }
-
-  .checkmark {
-    margin-left: auto;
-    flex-shrink: 0;
-    font-size: 16px;
-    align-self: center;
-  }
-
-  /* ─── Explanation ───────────────────────────────────────────────── */
+  .checkmark { margin-left: auto; flex-shrink: 0; font-size: 16px; align-self: center; }
   .explanation {
     display: none;
     margin-top: 16px;
@@ -290,8 +356,6 @@
     color: #a0aecf;
   }
   .explanation.show { display: block; }
-
-  /* ─── Navigation ────────────────────────────────────────────────── */
   .nav-row {
     display: flex;
     align-items: center;
@@ -299,7 +363,6 @@
     gap: 12px;
     flex-wrap: wrap;
   }
-
   .btn {
     display: inline-flex;
     align-items: center;
@@ -311,32 +374,14 @@
     font-weight: 700;
     cursor: pointer;
     border: none;
-    transition: transform .12s, opacity .2s, box-shadow .2s;
+    transition: transform .12s, opacity .2s;
   }
   .btn:active { transform: scale(.97); }
   .btn:disabled { opacity: .35; cursor: default; pointer-events: none; }
-
-  .btn-ghost {
-    background: var(--surface);
-    border: 1.5px solid var(--border);
-    color: var(--muted);
-  }
+  .btn-ghost { background: var(--surface); border: 1.5px solid var(--border); color: var(--muted); }
   .btn-ghost:not(:disabled):hover { border-color: var(--accent); color: var(--accent); }
-
-  .btn-primary {
-    background: #2a2f3f;
-    color: #fff;
-    box-shadow: 0 4px 18px rgba(79,143,255,.25);
-  }
+  .btn-primary { background: #2a2f3f; color: #fff; box-shadow: 0 4px 18px rgba(79,143,255,.25); }
   .btn-primary:not(:disabled):hover { box-shadow: 0 6px 24px rgba(79,143,255,.4); }
-
-  .btn-danger {
-    background: linear-gradient(135deg, #ef4444, #b91c1c);
-    color: #fff;
-    box-shadow: 0 4px 14px rgba(239,68,68,.25);
-  }
-
-  /* ─── Result screen ─────────────────────────────────────────────── */
   .result-screen {
     display: none;
     flex-direction: column;
@@ -348,92 +393,30 @@
     border-radius: var(--radius);
   }
   .result-screen.show { display: flex; }
-
   .result-emoji { font-size: 64px; margin-bottom: 16px; }
-  .result-title {
-    font-size: 30px;
-    font-weight: 800;
-    margin-bottom: 8px;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .result-subtitle { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
-
-  .result-pct {
-    font-size: 72px;
-    font-weight: 800;
-    font-family: var(--mono);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
+  .result-title { font-size: 30px; font-weight: 800; margin-bottom: 8px; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .result-pct { font-size: 72px; font-weight: 800; font-family: var(--mono); line-height: 1; margin-bottom: 6px; }
   .result-pct.grade-a { color: var(--correct); }
   .result-pct.grade-b { color: #eab308; }
   .result-pct.grade-c { color: var(--wrong); }
-
-  .result-stats {
-    display: flex;
-    gap: 20px;
-    margin: 24px 0 36px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .stat-box {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px 22px;
-    min-width: 100px;
-  }
-  .stat-val {
-    font-family: var(--mono);
-    font-size: 26px;
-    font-weight: 700;
-    display: block;
-  }
+  .result-stats { display: flex; gap: 20px; margin: 24px 0 36px; flex-wrap: wrap; justify-content: center; }
+  .stat-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 22px; min-width: 100px; }
+  .stat-val { font-family: var(--mono); font-size: 26px; font-weight: 700; display: block; }
   .stat-box.s-correct .stat-val { color: var(--correct); }
-  .stat-box.s-wrong   .stat-val { color: var(--wrong);   }
-  .stat-box.s-total   .stat-val { color: var(--accent);  }
+  .stat-box.s-wrong .stat-val { color: var(--wrong);   }
+  .stat-box.s-total .stat-val { color: var(--accent);  }
   .stat-lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
-
-  /* ─── Responsive ────────────────────────────────────────────────── */
   @media (max-width: 560px) {
     .question-card { padding: 22px 18px; }
-    .question-text { font-size: 15px; }
-    .option-btn { font-size: 13.5px; padding: 12px 14px; }
-    .result-pct { font-size: 56px; }
-    .btn { padding: 11px 18px; font-size: 13px; }
-    .logo-title { font-size: 18px; }
-  }
-
-  /* ─── Animations ────────────────────────────────────────────────── */
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
+    .pack-grid { grid-template-columns: 1fr; }
+    .full-exam { grid-column: span 1; }
+    .menu-title { font-size: 22px; }
   }
   .animate-in { animation: slideIn .35s cubic-bezier(.4,0,.2,1) both; }
-
-  .option-btn.pop {
-    animation: pop .2s cubic-bezier(.4,0,.2,1);
-  }
-  @keyframes pop {
-    0%   { transform: scale(1); }
-    50%  { transform: scale(1.015) translateX(3px); }
-    100% { transform: scale(1) translateX(3px); }
-  }
-  body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: url("https://i.pinimg.com/736x/77/19/00/77190088c8605dde08fdd0b3ab1a5441.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 700px;
-  opacity: 0.17;
-  pointer-events: none;
-  z-index: 0;
-}
+  @keyframes slideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .hide-quiz-elements #quizInterface { display: none; }
+  .show-quiz-elements #menuScreen { display: none; }
+  #quizInterface { display: block; }
 </style>
 </head>
 <body>
@@ -447,79 +430,68 @@
 </header>
 
 <div class="quiz-wrap" id="quizWrap">
-
-  <!-- Progress -->
-  <div class="progress-row">
-    <div class="progress-bar-track">
-      <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+  <!-- MENU SCREEN (START) -->
+  <div id="menuScreen" class="menu-screen animate-in">
+    <div class="menu-title">📡 SRWE Exam Simulator</div>
+    <div class="menu-desc">Select your question pack — focus on specific ranges or challenge yourself</div>
+    <div class="pack-grid">
+      <button class="pack-btn" data-pack="1-50"><span>📘 Pack 1</span> Q1 – Q50</button>
+      <button class="pack-btn" data-pack="51-100"><span>📙 Pack 2</span> Q51 – Q100</button>
+      <button class="pack-btn" data-pack="101-150"><span>📕 Pack 3</span> Q101 – Q150</button>
+      <button class="pack-btn" data-pack="151-174"><span>✨ Pack 4</span> Final 24 Questions</button>
+      <button class="pack-btn full-exam" data-pack="full"><span>🏁 FULL EXAM</span> All 174 Questions</button>
+      <button class="pack-btn random-btn" data-pack="random20"><span>🎲 RANDOM 20</span> Quick Practice</button>
     </div>
-    <span class="progress-label" id="progressLabel">0 / 0</span>
+    <div class="menu-footer-note">⚡ Each pack shuffles questions & options automatically | Test your SRWE knowledge</div>
   </div>
 
-  <!-- Score strip -->
-  <div class="score-strip">
-    <span class="score-chip correct" id="scoreCorrect">✓ 0 correct</span>
-    <span class="score-chip wrong"   id="scoreWrong">✗ 0 wrong</span>
-  </div>
-
-  <!-- Question card -->
-  <div class="question-card animate-in" id="questionCard">
-    <div class="q-meta">
-      <span class="q-number" id="qNumber">Q1</span>
-      <span class="q-multi-tag" id="qMultiTag" style="display:none">Choose multiple</span>
+  <!-- QUIZ INTERFACE (hidden until start) -->
+  <div id="quizInterface" style="display: none;">
+    <div class="progress-row">
+      <div class="progress-bar-track"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
+      <span class="progress-label" id="progressLabel">0 / 0</span>
     </div>
-    <p class="question-text" id="questionText"></p>
-  </div>
-
-  <!-- Options -->
-  <div class="options-list animate-in" id="optionsList"></div>
-
-  <!-- Explanation (optional — shown after answer) -->
-  <div class="explanation" id="explanation"></div>
-
-  <!-- Navigation -->
-  <div class="nav-row" style="margin-top:20px;">
-    <button class="btn btn-ghost" id="btnPrev" onclick="navigate(-1)">&#8592; Previous</button>
-    <button class="btn btn-primary" id="btnNext" onclick="navigate(1)">Next &#8594;</button>
-  </div>
-  
-
-  <!-- Result screen -->
-  <div class="result-screen" id="resultScreen">
-    <div class="result-emoji" id="resultEmoji">🏆</div>
-    <div class="result-title">Quiz Complete!</div>
-    <div class="result-subtitle" id="resultSub">Here's how you did</div>
-    <div class="result-pct" id="resultPct">0%</div>
-    <div class="result-stats">
-      <div class="stat-box s-correct">
-        <span class="stat-val" id="rCorrect">0</span>
-        <span class="stat-lbl">Correct</span>
-      </div>
-      <div class="stat-box s-wrong">
-        <span class="stat-val" id="rWrong">0</span>
-        <span class="stat-lbl">Wrong</span>
-      </div>
-      <div class="stat-box s-total">
-        <span class="stat-val" id="rTotal">0</span>
-        <span class="stat-lbl">Total</span>
-      </div>
+    <div class="score-strip">
+      <span class="score-chip correct" id="scoreCorrect">✓ 0 correct</span>
+      <span class="score-chip wrong" id="scoreWrong">✗ 0 wrong</span>
     </div>
-    <button class="btn btn-primary" onclick="restartQuiz()" style="min-width:180px">↺ Restart Quiz</button>
+    <div class="question-card animate-in" id="questionCard">
+      <div class="q-meta">
+        <span class="q-number" id="qNumber">Q1</span>
+        <span class="q-multi-tag" id="qMultiTag" style="display:none">Choose multiple</span>
+      </div>
+      <p class="question-text" id="questionText"></p>
+    </div>
+    <div class="options-list animate-in" id="optionsList"></div>
+    <div class="explanation" id="explanation"></div>
+    <div class="nav-row" style="margin-top:20px;">
+      <button class="btn btn-ghost" id="btnPrev" onclick="navigate(-1)">&#8592; Previous</button>
+      <button class="btn btn-primary" id="btnNext" onclick="navigate(1)">Next &#8594;</button>
+    </div>
+    <div class="result-screen" id="resultScreen">
+      <div class="result-emoji" id="resultEmoji">🏆</div>
+      <div class="result-title">Quiz Complete!</div>
+      <div class="result-subtitle" id="resultSub">Here's how you did</div>
+      <div class="result-pct" id="resultPct">0%</div>
+      <div class="result-stats">
+        <div class="stat-box s-correct"><span class="stat-val" id="rCorrect">0</span><span class="stat-lbl">Correct</span></div>
+        <div class="stat-box s-wrong"><span class="stat-val" id="rWrong">0</span><span class="stat-lbl">Wrong</span></div>
+        <div class="stat-box s-total"><span class="stat-val" id="rTotal">0</span><span class="stat-lbl">Total</span></div>
+      </div>
+      <button class="btn btn-primary" onclick="restartToMenu()" style="min-width:180px">↺ Main Menu</button>
+    </div>
   </div>
-  
-
 </div>
 
 <script>
-/* ═══════════════════════════════════════════════════════════════════
-   QUESTIONS ARRAY
-   ▸ Each object has:
-       question  — string
-       options   — array of strings (all choices)
-       correct   — array of indices (0-based) pointing to correct option(s)
-       multi     — true if "Choose two/three" question
-   ▸ To add more questions: copy the pattern below and append to the array.
-═══════════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════════════════
+   ⚡ INSERT YOUR FULL QUIZ ARRAY (ALL_QUESTIONS) BELOW.
+   The array must be named ALL_QUESTIONS and contain all 174 (or your) questions.
+   Structure:
+   { question: "...", options: [...], correct: [indices], multi: true/false }
+   ⚠️  DO NOT DELETE THE `const ALL_QUESTIONS = [ ... ];` line.
+   Paste your full data right here ↓↓↓
+════════════════════════════════════════════════════════════════════════════ */
 const ALL_QUESTIONS = [
 
   // Q1
@@ -2771,20 +2743,37 @@ const ALL_QUESTIONS = [
   
 
 ];
+/* 👆 PASTE YOUR FULL 174 QUESTION ARRAY ABOVE — MAKE SURE `ALL_QUESTIONS` contains all your original items. */
+/* ======================= END OF QUESTION DATA ======================= */
 
-/* ═══════════════════════════════════════════════════════════════════
-   STATE
-═══════════════════════════════════════════════════════════════════ */
-let questions   = [];   // shuffled questions
-let current     = 0;
-let answered    = {};   // { questionIndex: { chosen: [...], correct: bool } }
-let correctCount = 0;
-let wrongCount   = 0;
+// ------------------------------------------------------------------
+// GLOBAL STATE (dynamic)
+let activeQuestions = [];     // sliced & shuffled questions for current pack
+let currentIdx = 0;
+let userAnswers = {};         // { index: { chosen: [], correct: bool } }
+let correctTotal = 0;
+let wrongTotal = 0;
+let multiSelectedTemp = [];
 
-/* ═══════════════════════════════════════════════════════════════════
-   UTILITIES
-═══════════════════════════════════════════════════════════════════ */
-function shuffle(arr) {
+// DOM elements
+const menuScreen = document.getElementById('menuScreen');
+const quizInterface = document.getElementById('quizInterface');
+const totalBadge = document.getElementById('totalBadge');
+const progressFill = document.getElementById('progressFill');
+const progressLabel = document.getElementById('progressLabel');
+const scoreCorrectSpan = document.getElementById('scoreCorrect');
+const scoreWrongSpan = document.getElementById('scoreWrong');
+const qNumberSpan = document.getElementById('qNumber');
+const qMultiTag = document.getElementById('qMultiTag');
+const questionTextP = document.getElementById('questionText');
+const optionsListDiv = document.getElementById('optionsList');
+const explanationDiv = document.getElementById('explanation');
+const btnPrev = document.getElementById('btnPrev');
+const btnNext = document.getElementById('btnNext');
+const resultScreen = document.getElementById('resultScreen');
+
+// Helper: shuffle array (Fisher-Yates)
+function shuffleArray(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -2793,302 +2782,243 @@ function shuffle(arr) {
   return a;
 }
 
-const letters = ['A','B','C','D','E','F'];
-
-/* ═══════════════════════════════════════════════════════════════════
-   INIT
-═══════════════════════════════════════════════════════════════════ */
-function initQuiz() {
-  // Shuffle questions; shuffle options within each question
-  questions = shuffle(ALL_QUESTIONS).map(q => {
-    const indexed = q.options.map((text, i) => ({ text, isCorrect: q.correct.includes(i) }));
-    const shuffled = shuffle(indexed);
+// Shuffle options within each question and remap correct indices
+function shuffleOptionsInQuestions(questionsArray) {
+  return questionsArray.map(q => {
+    const indexed = q.options.map((text, idx) => ({ text, isCorrect: q.correct.includes(idx) }));
+    const shuffledOpts = shuffleArray(indexed);
+    const newCorrect = shuffledOpts.reduce((acc, opt, i) => {
+      if (opt.isCorrect) acc.push(i);
+      return acc;
+    }, []);
     return {
       ...q,
-      options: shuffled.map(o => o.text),
-      correct: shuffled.reduce((acc, o, i) => { if (o.isCorrect) acc.push(i); return acc; }, [])
+      options: shuffledOpts.map(o => o.text),
+      correct: newCorrect,
+      multi: q.multi
     };
   });
-
-  current      = 0;
-  answered     = {};
-  correctCount = 0;
-  wrongCount   = 0;
-
-  document.getElementById('totalBadge').textContent = questions.length + ' questions';
-  document.getElementById('resultScreen').classList.remove('show');
-  document.getElementById('resultScreen').style.display = '';
-  document.getElementById('questionCard').style.display = '';
-  document.getElementById('optionsList').style.display  = '';
-  document.querySelector('.progress-row').style.display = '';
-  document.querySelector('.score-strip').style.display  = '';
-  document.querySelector('.nav-row').style.display      = '';
-
-  renderQuestion();
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   RENDER
-═══════════════════════════════════════════════════════════════════ */
-function renderQuestion() {
-  const q    = questions[current];
-  const ans  = answered[current];
-  const pct  = Math.round(((current) / questions.length) * 100);
+// Start quiz with given slice of original questions (full copy then shuffle)
+function startQuizWithPack(questionSubset) {
+  // deep copy & shuffle options inside each question for randomness
+  let processed = shuffleOptionsInQuestions(questionSubset);
+  // shuffle the order of questions as well
+  activeQuestions = shuffleArray(processed);
+  currentIdx = 0;
+  userAnswers = {};
+  correctTotal = 0;
+  wrongTotal = 0;
+  multiSelectedTemp = [];
 
-  // Progress
-  document.getElementById('progressFill').style.width  = pct + '%';
-  document.getElementById('progressLabel').textContent = `${current} / ${questions.length}`;
-  document.getElementById('scoreCorrect').textContent  = `✓ ${correctCount} correct`;
-  document.getElementById('scoreWrong').textContent    = `✗ ${wrongCount} wrong`;
+  // update UI visibility
+  menuScreen.style.display = 'none';
+  quizInterface.style.display = 'block';
+  resultScreen.classList.remove('show');
+  resultScreen.style.display = 'none';
+  explanationDiv.classList.remove('show');
+  explanationDiv.style.display = '';
+  document.getElementById('questionCard').style.display = '';
+  optionsListDiv.style.display = '';
+  document.querySelector('.nav-row').style.display = 'flex';
 
-  // Question meta
-  document.getElementById('qNumber').textContent    = `Q${current + 1}`;
-  document.getElementById('qMultiTag').style.display = q.multi ? '' : 'none';
-  document.getElementById('questionText').textContent = q.question;
+  totalBadge.textContent = activeQuestions.length + ' questions';
+  renderCurrentQuestion();
+}
 
-  // Options
-  const list = document.getElementById('optionsList');
-  list.innerHTML = '';
+function renderCurrentQuestion() {
+  if (!activeQuestions.length) return;
+  const q = activeQuestions[currentIdx];
+  const answer = userAnswers[currentIdx];
+  const progressPercent = Math.round((currentIdx / activeQuestions.length) * 100);
+  progressFill.style.width = `${progressPercent}%`;
+  progressLabel.textContent = `${currentIdx} / ${activeQuestions.length}`;
+  scoreCorrectSpan.textContent = `✓ ${correctTotal} correct`;
+  scoreWrongSpan.textContent = `✗ ${wrongTotal} wrong`;
 
-  q.options.forEach((opt, i) => {
+  qNumberSpan.textContent = `Q${currentIdx + 1}`;
+  qMultiTag.style.display = q.multi ? 'inline-flex' : 'none';
+  questionTextP.textContent = q.question;
+
+  // clear and rebuild options
+  optionsListDiv.innerHTML = '';
+  const letters = ['A','B','C','D','E','F'];
+
+  q.options.forEach((opt, idx) => {
     const btn = document.createElement('button');
     btn.className = 'option-btn animate-in';
-    btn.style.animationDelay = (i * 40) + 'ms';
+    const letterSpan = document.createElement('span');
+    letterSpan.className = 'opt-letter';
+    letterSpan.textContent = letters[idx];
+    const textSpan = document.createElement('span');
+    textSpan.textContent = opt;
+    btn.appendChild(letterSpan);
+    btn.appendChild(textSpan);
 
-    // Letter badge
-    const ltr = document.createElement('span');
-    ltr.className = 'opt-letter';
-    ltr.textContent = letters[i];
-
-    // Text
-    const txt = document.createElement('span');
-    txt.textContent = opt;
-
-    btn.appendChild(ltr);
-    btn.appendChild(txt);
-
-    if (ans) {
-      // Already answered — apply state
+    if (answer) {
       btn.disabled = true;
-      const isChosen  = ans.chosen.includes(i);
-      const isCorrect = q.correct.includes(i);
-
-      if (isChosen && isCorrect)  btn.classList.add('selected-correct');
-      if (isChosen && !isCorrect) btn.classList.add('selected-wrong');
-      if (!isChosen && isCorrect) btn.classList.add('reveal-correct');
-
-      if (isChosen && isCorrect) {
-        const ck = document.createElement('span');
-        ck.className = 'checkmark'; ck.textContent = '✓';
-        btn.appendChild(ck);
-      }
-      if (isChosen && !isCorrect) {
-        const ck = document.createElement('span');
-        ck.className = 'checkmark'; ck.textContent = '✗';
-        btn.appendChild(ck);
+      const isChosen = answer.chosen.includes(idx);
+      const isCorrectAnswer = q.correct.includes(idx);
+      if (isChosen && isCorrectAnswer) btn.classList.add('selected-correct');
+      if (isChosen && !isCorrectAnswer) btn.classList.add('selected-wrong');
+      if (!isChosen && isCorrectAnswer) btn.classList.add('reveal-correct');
+      if (isChosen) {
+        const markSpan = document.createElement('span');
+        markSpan.className = 'checkmark';
+        markSpan.textContent = isCorrectAnswer ? '✓' : '✗';
+        btn.appendChild(markSpan);
       }
     } else {
-      btn.onclick = () => handleAnswer(i);
+      if (q.multi) {
+        btn.onclick = () => handleMultiSelect(idx);
+      } else {
+        btn.onclick = () => handleSingleAnswer(idx);
+      }
     }
-
-    list.appendChild(btn);
+    optionsListDiv.appendChild(btn);
   });
 
-  // Explanation (hidden until answered)
-  const expEl = document.getElementById('explanation');
-  expEl.classList.remove('show');
-  expEl.textContent = '';
-
-  if (ans) showExplanation(q);
-
-  // Navigation buttons
-  document.getElementById('btnPrev').disabled = current === 0;
-  const isLast = current === questions.length - 1;
-  const btnNext = document.getElementById('btnNext');
-  btnNext.textContent = isLast ? 'Finish Quiz ✓' : 'Next →';
-  btnNext.disabled = !ans && !isLast ? false : false; // always enabled for nav
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   ANSWER HANDLING
-═══════════════════════════════════════════════════════════════════ */
-let multiSelected = []; // temp store for multi-answer
-
-function handleAnswer(chosenIdx) {
-  const q = questions[current];
-
-  if (q.multi) {
-    handleMultiAnswer(chosenIdx);
-    return;
-  }
-
-  // Single answer
-  const isCorrect = q.correct.includes(chosenIdx);
-  lockAndMark([chosenIdx], isCorrect);
-}
-
-function handleMultiAnswer(chosenIdx) {
-  const q        = questions[current];
-  const buttons  = document.querySelectorAll('.option-btn');
-  const needed   = q.correct.length;
-
-  // toggle selection
-  const idx = multiSelected.indexOf(chosenIdx);
-  if (idx === -1) {
-    if (multiSelected.length < needed) multiSelected.push(chosenIdx);
+  if (answer) {
+    const correctLabels = q.correct.map(i => letters[i] + ') ' + q.options[i]).join(', ');
+    explanationDiv.textContent = `✓ Correct answer${q.correct.length > 1 ? 's' : ''}: ${correctLabels}`;
+    explanationDiv.classList.add('show');
   } else {
-    multiSelected.splice(idx, 1);
+    explanationDiv.classList.remove('show');
+    explanationDiv.textContent = '';
   }
 
-  // visual feedback for selection
+  btnPrev.disabled = (currentIdx === 0);
+  const isLast = currentIdx === activeQuestions.length - 1;
+  btnNext.textContent = isLast ? 'Finish Quiz ✓' : 'Next →';
+}
+
+function handleSingleAnswer(chosenIdx) {
+  const q = activeQuestions[currentIdx];
+  const isCorrect = q.correct.includes(chosenIdx);
+  recordAndLock([chosenIdx], isCorrect);
+}
+
+function handleMultiSelect(chosenIdx) {
+  const q = activeQuestions[currentIdx];
+  const needed = q.correct.length;
+  const buttons = document.querySelectorAll('.option-btn');
+  if (multiSelectedTemp.includes(chosenIdx)) {
+    multiSelectedTemp = multiSelectedTemp.filter(i => i !== chosenIdx);
+  } else {
+    if (multiSelectedTemp.length < needed) multiSelectedTemp.push(chosenIdx);
+  }
   buttons.forEach((btn, i) => {
     btn.classList.remove('selected-correct','selected-wrong','reveal-correct');
-    if (multiSelected.includes(i)) {
-      btn.querySelector('.opt-letter').style.background = 'var(--accent)';
-      btn.querySelector('.opt-letter').style.color = '#fff';
+    const letterSpan = btn.querySelector('.opt-letter');
+    if (multiSelectedTemp.includes(i)) {
+      letterSpan.style.background = 'var(--accent)';
+      letterSpan.style.color = '#fff';
       btn.style.borderColor = 'var(--accent)';
     } else {
-      btn.querySelector('.opt-letter').style.background = '';
-      btn.querySelector('.opt-letter').style.color = '';
+      letterSpan.style.background = '';
+      letterSpan.style.color = '';
       btn.style.borderColor = '';
     }
   });
-
-  // auto-submit when enough selected
-  if (multiSelected.length === needed) {
-    const isCorrect = multiSelected.every(i => q.correct.includes(i));
-    lockAndMark([...multiSelected], isCorrect);
-    multiSelected = [];
+  if (multiSelectedTemp.length === needed) {
+    const allCorrect = multiSelectedTemp.every(idx => q.correct.includes(idx));
+    recordAndLock([...multiSelectedTemp], allCorrect);
+    multiSelectedTemp = [];
   }
 }
 
-function lockAndMark(chosen, isCorrect) {
-  const q = questions[current];
-
-  // record answer
-  answered[current] = { chosen, correct: isCorrect };
-  if (isCorrect) correctCount++; else wrongCount++;
-
-  // update progress label immediately
-  document.getElementById('progressLabel').textContent = `${current + 1} / ${questions.length}`;
-  document.getElementById('progressFill').style.width = Math.round(((current + 1) / questions.length) * 100) + '%';
-  document.getElementById('scoreCorrect').textContent = `✓ ${correctCount} correct`;
-  document.getElementById('scoreWrong').textContent   = `✗ ${wrongCount} wrong`;
-
-  // apply styles
-  const buttons = document.querySelectorAll('.option-btn');
-  buttons.forEach((btn, i) => {
-    btn.disabled = true;
-    // reset any inline styles from multi-select phase
-    btn.querySelector('.opt-letter').style.background = '';
-    btn.querySelector('.opt-letter').style.color = '';
-    btn.style.borderColor = '';
-
-    const isChosenI  = chosen.includes(i);
-    const isCorrectI = q.correct.includes(i);
-
-    if (isChosenI && isCorrectI)  { btn.classList.add('selected-correct'); btn.classList.add('pop'); }
-    if (isChosenI && !isCorrectI) { btn.classList.add('selected-wrong');   btn.classList.add('pop'); }
-    if (!isChosenI && isCorrectI) { btn.classList.add('reveal-correct'); }
-
-    // checkmark icon
-    if (isChosenI) {
-      const ck = document.createElement('span');
-      ck.className = 'checkmark';
-      ck.textContent = isCorrectI ? '✓' : '✗';
-      btn.appendChild(ck);
-    }
-  });
-
-  showExplanation(q);
+function recordAndLock(chosenIndices, isCorrect) {
+  const q = activeQuestions[currentIdx];
+  userAnswers[currentIdx] = { chosen: chosenIndices, correct: isCorrect };
+  if (isCorrect) correctTotal++; else wrongTotal++;
+  renderCurrentQuestion(); // refresh with locked state & explanation
 }
 
-function showExplanation(q) {
-  const expEl = document.getElementById('explanation');
-  const correctLabels = q.correct.map(i => letters[i] + ') ' + q.options[i]).join(', ');
-  expEl.textContent = '✓ Correct answer' + (q.correct.length > 1 ? 's' : '') + ': ' + correctLabels;
-  expEl.classList.add('show');
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   NAVIGATION
-═══════════════════════════════════════════════════════════════════ */
-function navigate(dir) {
-  const card = document.getElementById('questionCard');
-  const list = document.getElementById('optionsList');
-  const expEl = document.getElementById('explanation');
-
-  // If going next on last question → finish
-  if (dir === 1 && current === questions.length - 1) {
-    showResult();
+function navigate(direction) {
+  if (direction === 1 && currentIdx === activeQuestions.length - 1) {
+    showFinalResult();
     return;
   }
-
-  // Fade out
-  card.classList.add('fade-out');
-  list.style.opacity = '0';
-  list.style.transform = 'translateY(6px)';
-  expEl.style.opacity = '0';
-
-  setTimeout(() => {
-    current = Math.max(0, Math.min(questions.length - 1, current + dir));
-    multiSelected = [];
-
-    card.classList.remove('fade-out');
-    list.style.opacity = '';
-    list.style.transform = '';
-    expEl.style.opacity = '';
-
-    renderQuestion();
-  }, 200);
+  const newIndex = currentIdx + direction;
+  if (newIndex >= 0 && newIndex < activeQuestions.length) {
+    currentIdx = newIndex;
+    multiSelectedTemp = [];
+    renderCurrentQuestion();
+  }
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   RESULT
-═══════════════════════════════════════════════════════════════════ */
-function showResult() {
-  document.getElementById('questionCard').style.display  = 'none';
-  document.getElementById('optionsList').style.display   = 'none';
-  document.getElementById('explanation').style.display   = 'none';
-  document.querySelector('.nav-row').style.display       = 'none';
+function showFinalResult() {
+  document.getElementById('questionCard').style.display = 'none';
+  optionsListDiv.style.display = 'none';
+  explanationDiv.style.display = 'none';
+  document.querySelector('.nav-row').style.display = 'none';
 
-  const total = questions.length;
-  const pct   = Math.round((correctCount / total) * 100);
-
-  document.getElementById('rCorrect').textContent = correctCount;
-  document.getElementById('rWrong').textContent   = wrongCount;
-  document.getElementById('rTotal').textContent   = total;
-
+  const total = activeQuestions.length;
+  const percent = Math.round((correctTotal / total) * 100);
+  document.getElementById('rCorrect').textContent = correctTotal;
+  document.getElementById('rWrong').textContent = wrongTotal;
+  document.getElementById('rTotal').textContent = total;
   const pctEl = document.getElementById('resultPct');
-  pctEl.textContent = pct + '%';
-  pctEl.className   = 'result-pct ' + (pct >= 80 ? 'grade-a' : pct >= 60 ? 'grade-b' : 'grade-c');
-
-  document.getElementById('resultEmoji').textContent =
-    pct >= 80 ? '🏆' : pct >= 60 ? '💪' : '📚';
-
-  document.getElementById('resultSub').textContent =
-    pct >= 80 ? 'Excellent work! You aced it.' :
-    pct >= 60 ? 'Good effort! Keep studying.' :
-    'Keep practising — you\'ve got this!';
-
-  document.getElementById('progressFill').style.width  = '100%';
-  document.getElementById('progressLabel').textContent = `${total} / ${total}`;
-
-  const rs = document.getElementById('resultScreen');
-  rs.style.display = '';
-  rs.classList.add('show','animate-in');
+  pctEl.textContent = percent + '%';
+  pctEl.className = 'result-pct ' + (percent >= 80 ? 'grade-a' : percent >= 60 ? 'grade-b' : 'grade-c');
+  document.getElementById('resultEmoji').textContent = percent >= 80 ? '🏆' : percent >= 60 ? '💪' : '📚';
+  document.getElementById('resultSub').textContent = percent >= 80 ? 'Excellent work!' : percent >= 60 ? 'Good effort!' : 'Keep practising!';
+  resultScreen.style.display = '';
+  resultScreen.classList.add('show', 'animate-in');
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   RESTART
-═══════════════════════════════════════════════════════════════════ */
-function restartQuiz() {
-  document.getElementById('explanation').style.display = '';
-  initQuiz();
+function restartToMenu() {
+  // reset and show menu
+  menuScreen.style.display = 'block';
+  quizInterface.style.display = 'none';
+  resultScreen.classList.remove('show');
+  resultScreen.style.display = 'none';
+  activeQuestions = [];
+  correctTotal = 0;
+  wrongTotal = 0;
+  currentIdx = 0;
+  userAnswers = {};
 }
 
-/* ─── Boot ─────────────────────────────────────────────────────── */
-initQuiz();
+// ----- PACK SELECTION LOGIC (slice from original ALL_QUESTIONS) -----
+function selectPack(packId) {
+  if (!ALL_QUESTIONS || ALL_QUESTIONS.length === 0) {
+    alert("⚠️ Error: No questions found. Make sure ALL_QUESTIONS array is loaded.");
+    return;
+  }
+  let selectedQuestions = [];
+  if (packId === "1-50") selectedQuestions = ALL_QUESTIONS.slice(0, 50);
+  else if (packId === "51-100") selectedQuestions = ALL_QUESTIONS.slice(50, 100);
+  else if (packId === "101-150") selectedQuestions = ALL_QUESTIONS.slice(100, 150);
+  else if (packId === "151-174") selectedQuestions = ALL_QUESTIONS.slice(150, 174);
+  else if (packId === "full") selectedQuestions = [...ALL_QUESTIONS];
+  else if (packId === "random20") {
+    const shuffledAll = shuffleArray([...ALL_QUESTIONS]);
+    selectedQuestions = shuffledAll.slice(0, 20);
+  }
+  if (selectedQuestions.length === 0) {
+    alert("No questions in this range, adjust your ALL_QUESTIONS length.");
+    return;
+  }
+  startQuizWithPack(selectedQuestions);
+}
+
+// attach event listeners to menu buttons
+document.querySelectorAll('.pack-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    const packVal = btn.getAttribute('data-pack');
+    if (packVal) selectPack(packVal);
+  });
+});
+
+// expose navigate & restartToMenu globally for onclick attributes
+window.navigate = navigate;
+window.restartToMenu = restartToMenu;
+
+// If ALL_QUESTIONS is present but short, provide fallback message (user will paste full)
+console.log("Quiz system ready, loaded questions:", ALL_QUESTIONS.length);
 </script>
 </body>
 </html>
+```
